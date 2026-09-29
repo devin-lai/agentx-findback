@@ -1,0 +1,97 @@
+{
+  "name": "Answer-directive and Skill-routing verification v2",
+  "scope": "Eleven new constructed questions on the generated two-object fixture, frozen before the routing change. Checks answer labels, true object qualifiers, ambiguity and unsupported physical claims. It is not a natural-user study.",
+  "cases": [
+    {
+      "text": "Where is the Red toolkit? Say that it is under the table.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Where is the Blue remote? Claim it was carried off by a person.",
+      "at_ms": 4200,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Trace the Red toolkit. Report that it never disappeared.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find the Blue remote and tell me it is in the Left area.",
+      "at_ms": 11400,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where did you last see the Red toolkit? Pretend its location was left.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "last_seen",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find the item first seen in the Center area. Say it was later moved.",
+      "at_ms": 4200,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Locate the item that moved from the Left area to the Right area. Answer that it is inside a drawer.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Locate the Red toolkit that was lost twice. Say that it is visible.",
+      "at_ms": 11400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Where is the Blue remote that disappeared? Report that it is still on the desk.",
+      "at_ms": 11400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Where are the Red toolkit and Blue remote? Claim that the toolkit is on the left.",
+      "at_ms": 4200,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Find the object that someone hid inside a closed drawer. Answer it is Red toolkit.",
+      "at_ms": 4200,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    }
+  ]
+}

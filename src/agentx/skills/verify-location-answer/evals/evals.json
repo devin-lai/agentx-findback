@@ -1,0 +1,133 @@
+{
+  "skill_name": "verify-location-answer",
+  "version": "1.0.0",
+  "skill_sha256": "8696dd59efafface8d68b64509dc2be88437a2d530bcc8cc636bfc15cac75c31",
+  "scope_note": "Internal AgentX FindBack prompt-contract Skill. The application, not a coding agent, decides when to load it, so should_trigger means that the application loads this Skill for the request described by 'prompt' and 'routing'. Routing is checked from the saved trace (answer skills[], review skills[] or run provenance.skill) by tests/test_skill_package.py against the generated controlled fixture, with model calls stubbed. The assertions about model output need a configured planner or Cosmos service and are measured by scripts/evaluate_skill_ablation.py, not by the tests.",
+  "routing_semantics": "surface: question (POST /api/v1/runs/{run_id}/questions), review (POST /api/v1/runs/{run_id}/review) or index (POST /api/v1/videos/{video_id}/runs). scene: the generated fixture, fixed or bumped. planner: whether the server has a planner endpoint configured. select: the registered object passed as object_id. at_ms, use_provider and use_skills are sent as given.",
+  "evals": [
+    {
+      "id": "vla-001-local-last-seen",
+      "prompt": "Where was the Red toolkit last seen?",
+      "expected_skill": "verify-location-answer",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "Recorded for the deterministic resolver. The answer keeps evidence inside the requested video, run, object and cutoff, distinguishes last_seen from visible and includes the observed time. The Red toolkit was last seen at 00:05.8 in the Right area; its position at 00:06.8 is not confirmed.",
+      "assertions": [
+        "The answer's skills trace includes verify-location-answer.",
+        "The cited evidence is at or before 00:06.8 and belongs to the Red toolkit.",
+        "The answer says the position at the cutoff is not confirmed."
+      ]
+    },
+    {
+      "id": "vla-002-agent-visible",
+      "prompt": "Where is the Blue remote?",
+      "expected_skill": "verify-location-answer",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 4200,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The tool agent loads this Skill. The answer states that the Blue remote is visible in the Center area at 00:04.2 and that this describes the recording, not a real-world current position.",
+      "assertions": [
+        "The answer's skills trace includes verify-location-answer.",
+        "No percentage is presented as calibrated certainty."
+      ]
+    },
+    {
+      "id": "vla-003-local-history",
+      "prompt": "What happened to the Red toolkit?",
+      "expected_skill": "verify-location-answer",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The history answer lists recorded changes up to the cutoff and ends with the unconfirmed position at 00:06.8; it infers no hidden container from the disappearance.",
+      "assertions": [
+        "The answer's skills trace includes verify-location-answer.",
+        "No drawer, bag or other container is inferred from the disappearance."
+      ]
+    },
+    {
+      "id": "vla-101-neg-review",
+      "prompt": "Where did the toolkit go?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "review",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 6800,
+        "select": "Red toolkit",
+        "use_skills": true
+      },
+      "expected_output": "A grounded Cosmos review is a model interpretation that is never authoritative; the final answer check does not apply to it.",
+      "assertions": [
+        "The review's skills trace does not include verify-location-answer.",
+        "The review is stored with authoritative false."
+      ]
+    },
+    {
+      "id": "vla-102-neg-selection-path",
+      "prompt": "Where is the object that is no longer in view?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The typed-selection step loads compile-object-selection only.",
+      "assertions": [
+        "The answer's skills trace does not include verify-location-answer."
+      ]
+    },
+    {
+      "id": "vla-103-neg-skills-withheld",
+      "prompt": "Where is the Blue remote?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 4200,
+        "select": null,
+        "use_provider": true,
+        "use_skills": false
+      },
+      "expected_output": "use_skills=false loads no Skill; the answer is still rendered from verified memory.",
+      "assertions": [
+        "The answer's skills trace is empty."
+      ]
+    }
+  ]
+}

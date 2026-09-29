@@ -1,0 +1,180 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentx-findback"
+version = "0.1.0"
+description = "Evidence-backed visual memory for objects and future agents."
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+authors = [{name = "devin-lai"}, {name = "wingsuomo"}]
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic-settings>=2.7,<3",
+  "sqlalchemy>=2.0.38,<3", "alembic>=1.14,<2", "python-multipart>=0.0.20,<1",
+  "httpx>=0.28,<1", "av>=16.1,<17", "opencv-python>=4.11,<5",
+  "numpy>=2,<3", "pillow>=11,<13", "typer>=0.15,<1"
+]
+
+[project.optional-dependencies]
+vision = ["torch>=2.7,<3", "torchvision>=0.22,<1", "transformers>=4.57,<5", "trackers>=2,<3", "supervision>=0.27,<1"]
+postgres = ["psycopg[binary]>=3.2,<4"]
+ffmpeg = ["imageio-ffmpeg>=0.5,<1"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "mypy>=1.15,<2"]
+
+[project.scripts]
+agentx = "agentx.cli:app"
+
+[project.urls]
+Source = "https://github.com/devin-lai/agentx-findback"
+Issues = "https://github.com/devin-lai/agentx-findback/issues"
+Documentation = "https://github.com/devin-lai/agentx-findback/tree/main/docs"
+
+[tool.hatch.build]
+exclude = [
+  ".env",
+  ".env.*",
+  "!.env.example",
+  ".envrc",
+  ".netrc",
+  ".npmrc",
+  ".pypirc",
+  ".ssh/",
+  ".aws/",
+  ".kube/",
+  ".secrets/",
+  "secrets/",
+  "secrets.*",
+  "credentials/",
+  "credentials.*",
+  "credentials-*",
+  "credentials_*",
+  "*.pem",
+  "*.key",
+  "*.p12",
+  "*.pfx",
+  "*.jks",
+  "*.keystore",
+  "id_rsa*",
+  "id_ed25519*",
+  ".private/",
+  "private/",
+  "personal/",
+  "plans/",
+  "*.private.*",
+  "*.local.*",
+  "/docs/ROADMAP.md",
+  "/docs/COMPETITION.md",
+  "/docs/DEVELOPMENT_RUN*.md",
+  "/docs/CHANGELOG.md",
+  "/docs/submission/",
+  "/docs/benchmarks/*",
+  "!/docs/benchmarks/INDEX.md",
+  "/docs/images/*.json",
+  "/docs/images/tracking-*",
+  "/docs/images/camera-recovery.*",
+  "/docs/images/skill-lift.*",
+  "/docs/images/*offline-evidence-report.png",
+  "/scripts/research/",
+  "/scripts/eval/evaluate_skill_lift.py",
+  "/scripts/eval/local_skill_agent.py",
+  "/scripts/eval/plot_skill_lift.py",
+  ".agentx*/",
+  ".codex/",
+  ".claude/",
+  ".cursor/",
+  ".idea/",
+  ".vscode/",
+  "AGENTS.local.md",
+  "*.code-workspace",
+  ".venv/",
+  "venv/",
+  "__pycache__/",
+  "*.py[cod]",
+  ".pytest_cache/",
+  ".ruff_cache/",
+  ".mypy_cache/",
+  ".coverage",
+  ".coverage.*",
+  "coverage.xml",
+  "htmlcov/",
+  "*.egg-info/",
+  "/build/",
+  "/dist/",
+  "node_modules/",
+  "web/dist/",
+  "web/test-results/",
+  "web/playwright-report/",
+  "web/demo/",
+  "/model/",
+  "/models/",
+  "/data/",
+  "/datasets/",
+  "/uploads/",
+  "/recordings/",
+  "/artifacts/",
+  "/tmp/",
+  "*.xlsx",
+  "*.xls",
+  "*.numbers",
+  "*.docx",
+  "*.pptx",
+  "*.sqlite*",
+  "*.db",
+  "*.db-*",
+  "*.log",
+  "*.mp4",
+  "*.mov",
+  "*.avi",
+  "*.mkv",
+  "*.wav",
+  "*.mp3",
+  "*.safetensors",
+  "*.pt",
+  "*.pth",
+  "*.ckpt",
+  "*.onnx",
+  "*.gguf",
+  "*.zip",
+  "*.tar",
+  "*.tar.gz",
+  "*.tgz",
+  "*.bak",
+  "*.swp",
+  ".DS_Store",
+  "Thumbs.db",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src", "/tests", "/scripts", "/skills", "/integrations", "/docs", "/web/src", "/web/tests", "/web/public",
+  "/.github", "/web/*.json", "/web/*.ts", "/web/*.js", "/web/index.html",
+  "/web/.prettierrc.json", "/web/.prettierignore", "/.gitignore", "/.dockerignore",
+  "/.env.example", "/.python-version", "/README.md", "/AGENTS.md", "/CONTRIBUTING.md",
+  "/SECURITY.md", "/CODE_OF_CONDUCT.md", "/LICENSE", "/NOTICE", "/THIRD_PARTY_NOTICES.md",
+  "/pyproject.toml", "/uv.lock", "/Makefile", "/Dockerfile",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentx"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+check_untyped_defs = true

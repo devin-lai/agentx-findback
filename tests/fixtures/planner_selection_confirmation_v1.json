@@ -1,0 +1,190 @@
+{
+  "name": "Prospective constructed selection confirmation v1",
+  "scope": "24 new constructed paraphrases and times, frozen after v3 code and before any model run on them. This is a prospective language regression check on the generated fixture, not an independently sampled user study. Includes explicit none/ambiguous distinctions.",
+  "cases": [
+    {
+      "text": "Locate the registered thing which vanished and subsequently came back.",
+      "at_ms": 9000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Point me to whichever item began on the left-hand side.",
+      "at_ms": 4400,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Which item was observable in the middle at 0.5 seconds?",
+      "at_ms": 6600,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the thing observed on the right at 4.4 seconds.",
+      "at_ms": 9000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Which item has never been recorded outside the middle region?",
+      "at_ms": 9000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Show the movement history of the item whose first observation was on the left.",
+      "at_ms": 6600,
+      "expected_object": "Red toolkit",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Locate the item that disappeared exactly once.",
+      "at_ms": 9000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where is the object whose latest observed region was right?",
+      "at_ms": 6600,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find the object registered between 0 and 1 seconds.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Which item was visible at 0.5 seconds?",
+      "at_ms": 6600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Which object has a recorded sighting in the middle?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Locate the item that did not disappear before 2.5 seconds.",
+      "at_ms": 2500,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Which object was first observed before the one-second mark?",
+      "at_ms": 4400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Where is the item that is currently visible?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Locate the object that first appeared in the right-hand region.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the thing that returned before the seventh second.",
+      "at_ms": 6600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which item moved to the right in the first 2.5 seconds?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the item with two recorded disappearances.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which object was visible in the left-hand region at 00:04.4?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which item is observed on the right at 00:06.6?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Locate an item first registered between two and four seconds.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which object returned from being missing into the left region?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the item with a recorded move from the right region into the left.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Where is the object that is no longer visible?",
+      "at_ms": 2500,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    }
+  ]
+}

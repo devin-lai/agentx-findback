@@ -1,0 +1,102 @@
+{
+  "name": "Region-history quantifier confirmation v1",
+  "scope": "Constructed language regression on the existing generated fixture. Frozen after the quantifier repair and before the first model run. Not an independent natural-user sample or real-footage accuracy measure.",
+  "cases": [
+    {
+      "text": "Where is the object that never left the center area?",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the item that never left the left area.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the item that was never observed outside the middle.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Locate what was only ever seen in the centre.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the object that was never seen inside the center.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the object that was never seen inside the left area.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the item that was seen in the center.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Find the only item in the center.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Find the item that never left the center after 9 seconds.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Find the item that never left the center before 8 seconds.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Locate the object that was always in the center area.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the Red toolkit that never left the center area.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    }
+  ]
+}

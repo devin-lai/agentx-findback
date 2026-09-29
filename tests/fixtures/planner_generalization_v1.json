@@ -1,0 +1,290 @@
+{
+  "name": "Prospective renamed-inventory and qualifier selection v1",
+  "scope": "32 constructed questions with renamed objects and non-spatial region IDs; frozen before any model evaluation on these exact cases. Uses the same generated tracking fixture, so this is language generalization and contract coverage, not real-world or natural-user accuracy. Includes named-object false premises and unsupported future/physical claims.",
+  "fixture": {
+    "objects": {
+      "Red toolkit": {
+        "name": "Workshop pouch",
+        "label": "custom"
+      },
+      "Blue remote": {
+        "name": "Media controller",
+        "label": "remote"
+      }
+    },
+    "regions": {
+      "left": {
+        "id": "assembly",
+        "name": "Assembly mat"
+      },
+      "center": {
+        "id": "storage",
+        "name": "Storage tray"
+      },
+      "right": {
+        "id": "staging",
+        "name": "Staging area"
+      }
+    }
+  },
+  "cases": [
+    {
+      "text": "Where is the Workshop pouch?",
+      "at_ms": 4600,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "staging"
+    },
+    {
+      "text": "Where was the Media controller last seen?",
+      "at_ms": 6400,
+      "expected_object": "Media controller",
+      "expected_intent": "last_seen",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Show the history of Workshop pouch.",
+      "at_ms": 10600,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Where is the controller?",
+      "at_ms": 4600,
+      "expected_object": "Media controller",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Find the pouch.",
+      "at_ms": 6400,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "staging"
+    },
+    {
+      "text": "Locate the item currently in the Assembly mat.",
+      "at_ms": 4600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the item visible in the Storage tray.",
+      "at_ms": 6400,
+      "expected_object": "Media controller",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Find the item whose last recorded location is the Staging area.",
+      "at_ms": 6400,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "staging"
+    },
+    {
+      "text": "Locate whichever item was in the Assembly mat at 1.2 seconds.",
+      "at_ms": 10600,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Which item was visible in the Staging area at 6.4 seconds?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which item was first observed in the Storage tray?",
+      "at_ms": 4600,
+      "expected_object": "Media controller",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Which object started in the Staging area?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Locate the object recorded only in the Storage tray.",
+      "at_ms": 10600,
+      "expected_object": "Media controller",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Find the item never observed in the Assembly mat.",
+      "at_ms": 10600,
+      "expected_object": "Media controller",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Which object has been recorded in the Storage tray?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Which object moved from the Assembly mat into the Staging area?",
+      "at_ms": 4600,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "staging"
+    },
+    {
+      "text": "Which object moved from the Staging area into the Assembly mat?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which object disappeared once and then returned?",
+      "at_ms": 10600,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Which item has disappeared twice?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Show the timeline of whichever object has no recorded movement.",
+      "at_ms": 10600,
+      "expected_object": "Media controller",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Find the item registered during the first half-second.",
+      "at_ms": 6400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Which item first appeared after one second?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which object was observed in the Assembly mat before 0:02?",
+      "at_ms": 6400,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "staging"
+    },
+    {
+      "text": "Which item is visible in the Storage tray?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Find the Media controller that disappeared twice.",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Locate the Workshop pouch currently visible in the Staging area.",
+      "at_ms": 6400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Which Workshop pouch was first seen in the Storage tray?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the Media controller with a recorded move to the Assembly mat.",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Locate the Workshop pouch that moved into the Staging area.",
+      "at_ms": 4600,
+      "expected_object": "Workshop pouch",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "staging"
+    },
+    {
+      "text": "Find the Media controller that has only been recorded in the Storage tray.",
+      "at_ms": 10600,
+      "expected_object": "Media controller",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "storage"
+    },
+    {
+      "text": "Which registered object was visible after the 15-second mark?",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Locate the object that teleported through a locked drawer.",
+      "at_ms": 10600,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    }
+  ]
+}

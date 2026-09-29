@@ -1,0 +1,54 @@
+name: Quality checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check public paths and sensitive content
+        run: python3 scripts/ops/check_repository.py
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.33"
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install media runtime
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg libgl1 libglib2.0-0
+      - name: Install locked dependencies
+        run: |
+          uv sync --locked --python 3.12
+          npm --prefix web ci
+      - name: Static checks and backend tests
+        run: |
+          uv run --no-sync ruff check src tests scripts skills integrations
+          uv run --no-sync mypy src/agentx
+          uv run --no-sync pytest -q
+          npm --prefix web run check
+          npm --prefix web run format:check
+      - name: Build and test browser
+        run: |
+          npm --prefix web run build
+          cd web
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      - name: Controlled evaluation
+        run: uv run --no-sync python scripts/eval/evaluate.py
+      - name: Preserve diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentx-validation
+          path: |
+            artifacts/evaluation.json
+            web/test-results/
+          retention-days: 7

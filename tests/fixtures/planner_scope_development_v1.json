@@ -1,0 +1,20 @@
+{
+  "name": "Literal scope and unnamed-area development v1",
+  "scope": "Fourteen constructed questions on the generated two-object fixture. Authored before code changes to test unsupported literal names, location-history selection and genuine qualifiers. This is development evidence, not a natural-user benchmark.",
+  "cases": [
+    {"text": "Where is my stapler?", "at_ms": 4200, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Find the charging cable.", "at_ms": 9600, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Where are my reading glasses?", "at_ms": 1800, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Locate my screwdriver.", "at_ms": 11400, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Where is the Red toolkit?", "at_ms": 6800, "expected_object": "Red toolkit", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "last_seen", "expected_zone": "right"},
+    {"text": "Find the Blue remote.", "at_ms": 4200, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Find the item that never changed area in the recording so far.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Locate the registered object that stayed in one area through 11 seconds.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Find the object with no recorded move events.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Locate the object that moved from the Left area to the Right area.", "at_ms": 4200, "expected_object": "Red toolkit", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "right"},
+    {"text": "Find the Red toolkit that never changed areas.", "at_ms": 11400, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Where is the object currently in the Center area?", "at_ms": 4200, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Where is the green case?", "at_ms": 4200, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Find the item last seen in the Right area.", "at_ms": 6800, "expected_object": "Red toolkit", "expected_intent": "last_seen", "expected_resolution": "unique", "expected_status": "last_seen", "expected_zone": "right"}
+  ]
+}

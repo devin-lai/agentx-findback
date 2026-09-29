@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <title>FindBack evidence · $title</title>
+  <style>
+    :root{color-scheme:light;--ink:#293b2e;--muted:#667363;--line:#dce2d3;--green:#617940}
+    *{box-sizing:border-box}body{margin:0;background:#f6f7ef;color:var(--ink);font:15px/1.65 system-ui,-apple-system,sans-serif}
+    main{max-width:1080px;margin:auto;padding:40px 42px 70px}header{display:flex;justify-content:space-between;gap:24px;padding-bottom:22px;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.12em}header b{font-size:16px;letter-spacing:.02em}a{color:#415b27;text-underline-offset:4px}h1{font-size:clamp(28px,4vw,46px);line-height:1.2;letter-spacing:-.035em;max-width:850px;margin:12px 0 25px}h2{font-size:21px;letter-spacing:-.02em;margin:0 0 16px}p{margin:0 0 14px}.eyebrow{margin-top:34px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.notice{padding:10px 14px;border-left:3px solid #b49548;background:#f2eddb;font-size:13px}.answer{border:1px solid #bacba5;background:#ecf2e3;border-radius:16px;padding:26px 28px;margin-bottom:22px}.answer p:last-child{margin:0}.status{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#526634;margin-bottom:10px}.answer-text{font-size:18px;line-height:1.7}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:20px 0 26px;border-bottom:1px solid var(--line)}.metrics span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.metrics strong{font-size:22px;font-weight:500}section{margin-top:32px}.controls{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:16px}.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}figure{margin:0;min-width:0}.frame{position:relative;line-height:0;border:1px solid var(--line);background:#e6eadf;border-radius:12px;overflow:hidden}.frame img{display:block;width:100%;height:auto}.box{position:absolute;border:2px solid #d4ef68;box-shadow:0 0 0 1px #364525;pointer-events:none}.camera{position:absolute;left:8px;top:8px;padding:3px 9px;border-radius:999px;font:11px/1.5 system-ui,sans-serif;color:#1c1407;background:#f0b429;box-shadow:0 1px 4px #00000059;pointer-events:none}#boxes:not(:checked)~.gallery .box{display:none}figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 0 6px;font-size:12px}.time{font-variant-numeric:tabular-nums;font-weight:650}figcaption a{margin-left:auto}.small{font-size:10px;color:var(--muted);overflow-wrap:anywhere}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}th,td{padding:10px 12px;border-bottom:1px solid var(--line)}th{font-weight:500;color:var(--muted)}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;font-weight:550}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf0e6;padding:18px;border-radius:8px;font:11px/1.65 ui-monospace,monospace}.footnote{font-size:12px;color:var(--muted)}.hash{display:block;overflow-wrap:anywhere;font:11px/1.7 ui-monospace,monospace;margin:8px 0 16px}footer{border-top:1px solid var(--line);margin-top:32px;padding-top:24px}input{accent-color:var(--green)}.export-links{display:flex;gap:20px;flex-wrap:wrap;font-size:13px}
+    @media(max-width:640px){main{padding:24px 18px 45px}.gallery{grid-template-columns:1fr}header{font-size:10px}.answer{padding:20px}.answer-text{font-size:16px}.metrics{gap:10px}.metrics strong{font-size:18px}}
+    @media print{body{background:white}main{padding:0}figure,.answer{break-inside:avoid}.controls,details,.export-links{display:none}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  </style>
+</head>
+<body><main>
+  <header><b>◈ AgentX FindBack</b><span>OFFLINE EVIDENCE REPORT</span></header>
+  <p class="eyebrow">$title</p>
+  <h1>$question</h1>
+  $fixture
+  <div class="answer"><span class="status">$status</span><p class="answer-text">$answer</p></div>
+  <div class="metrics"><div><span>Answer cutoff</span><strong>$cutoff</strong></div><div><span>Source frames</span><strong>$frame_count</strong></div><div><span>Perception</span><strong>$backend</strong></div></div>
+  <section aria-label="Original evidence"><h2>See the evidence</h2>
+    <p class="footnote">Original source frames encoded as JPEG. Overlays show recorded object bounds; they do not modify the images.</p>
+    <input id="boxes" type="checkbox" checked><label for="boxes"> Show object bounds</label>
+    <div class="gallery" style="margin-top:18px">$evidence</div>
+  </section>
+  $history
+  <section><h2>How this answer was produced</h2>
+    <p class="footnote">The answer was revalidated against this memory version before export. Perception can still be wrong. Inspect the frames when objects look alike.</p>
+    <details><summary>Agent, Skills and tool trace</summary><p class="footnote">Recorded planner drafts describe the agent's decisions. They are not additional visual evidence.</p><pre>$trace</pre></details>
+    <details><summary>Memory version and model provenance</summary><pre>$provenance</pre></details>
+  </section>
+  <footer><h2>Check the source</h2><p class="footnote">Source video SHA-256, verified during export:</p><code class="hash">$source_hash</code>
+    <p class="footnote">$scope</p><p class="footnote">$limitations</p>
+    <p class="footnote">To check the extracted files, run <code>python3 verify.py</code> in this folder. Add <code>--source /path/to/original.mp4</code> to check your original video.</p>
+    <p class="export-links"><a href="report.json">Open machine-readable report</a><a href="manifest.json">Open file manifest</a></p>
+    <p class="small">Created $created_at · Works offline without AgentX or an inference service.</p>
+  </footer>
+</main></body></html>

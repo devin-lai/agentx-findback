@@ -1,0 +1,17 @@
+{
+  "name": "Literal scope and unnamed-area verification v1",
+  "scope": "Eleven new constructed questions on the generated two-object fixture, frozen before source changes or model calls on this file. Includes simple unknown inventory nouns, unnamed-area stationarity, explicit false qualifiers and known-object controls. Not a natural-user study.",
+  "cases": [
+    {"text": "Locate the tape dispenser.", "at_ms": 4200, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Where did you last see my flashlight?", "at_ms": 6800, "expected_object": null, "expected_intent": "last_seen", "expected_resolution": "none"},
+    {"text": "Show me the history of my pliers.", "at_ms": 11400, "expected_object": null, "expected_intent": "history", "expected_resolution": "none"},
+    {"text": "Which item never crossed from one marked area to another by 11.4 seconds?", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Find the object that stayed within a single recorded zone up to 11.4 seconds.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Locate the registered object with zero moves between recorded areas.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Find the Red toolkit that stayed in one area so far.", "at_ms": 11400, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Find the item only seen in the Center area by 11.4 seconds.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Where is the Blue remote at 00:04.2?", "at_ms": 4200, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Which item first appeared in the Left area?", "at_ms": 4200, "expected_object": "Red toolkit", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "right"},
+    {"text": "Find the Blue remote that moved from the Center area to the Right area.", "at_ms": 11400, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"}
+  ]
+}

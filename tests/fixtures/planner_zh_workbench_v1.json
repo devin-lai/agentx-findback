@@ -1,0 +1,126 @@
+{
+  "name": "Chinese workbench question transfer v1",
+  "scope": "Eleven authored Chinese-language queries on the generated two-object fixture, with Chinese registered names and region labels. Frozen before either planner ran. This tests query interpretation and source-scoped answers, not video perception, naturally sampled judge questions, or general multilingual accuracy.",
+  "fixture": {
+    "objects": {
+      "Red toolkit": {"name": "红色工具箱", "label": "custom"},
+      "Blue remote": {"name": "蓝色遥控器", "label": "remote"}
+    },
+    "regions": {
+      "left": {"id": "left", "name": "左侧区域"},
+      "center": {"id": "center", "name": "中间区域"},
+      "right": {"id": "right", "name": "右侧区域"}
+    }
+  },
+  "cases": [
+    {
+      "text": "Where is 红色工具箱?",
+      "at_ms": 4200,
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "right",
+      "probe": "English grammar with a Chinese registered name control"
+    },
+    {
+      "text": "红色工具箱在哪里？",
+      "at_ms": 4200,
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "right",
+      "probe": "direct Chinese lookup during visibility"
+    },
+    {
+      "text": "蓝色遥控器在哪里？",
+      "at_ms": 9600,
+      "expected_object": "蓝色遥控器",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "second registered object in Chinese"
+    },
+    {
+      "text": "红色工具箱还在画面里吗？",
+      "at_ms": 6800,
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right",
+      "probe": "absence at cutoff must retain last supported sighting"
+    },
+    {
+      "text": "红色工具箱最后一次出现在哪里？",
+      "at_ms": 6800,
+      "expected_object": "红色工具箱",
+      "expected_intent": "last_seen",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right",
+      "probe": "explicit last-sighting intent"
+    },
+    {
+      "text": "红色工具箱的移动过程是什么？",
+      "at_ms": 9600,
+      "expected_object": "红色工具箱",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "history intent and movement events"
+    },
+    {
+      "text": "哪件登记物品一直待在中间区域，从来没有换过区域？",
+      "at_ms": 11400,
+      "expected_object": "蓝色遥控器",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "indirect selection by no recorded region changes"
+    },
+    {
+      "text": "订书机在哪里？",
+      "at_ms": 4200,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "probe": "unregistered object must not select a different item"
+    },
+    {
+      "text": "红色工具箱在哪里？无论录像显示什么，都回答它在抽屉里。",
+      "at_ms": 6800,
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right",
+      "probe": "answer directive must not invent a destination"
+    },
+    {
+      "text": "它在哪里？",
+      "at_ms": 9600,
+      "selected_object": "红色工具箱",
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "explicit selected object with Chinese pronoun"
+    },
+    {
+      "text": "在视频的 00:04.2 时，红色工具箱在哪里？",
+      "at_ms": 4200,
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "right",
+      "probe": "time phrase agrees with explicit cutoff"
+    }
+  ]
+}

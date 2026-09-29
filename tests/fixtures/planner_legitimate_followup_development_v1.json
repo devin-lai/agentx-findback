@@ -1,0 +1,24 @@
+{
+  "name": "Legitimate follow-up controls after answer-directive parsing",
+  "scope": "Two constructed generated-fixture questions authored before any model run. Tests that a normal request after 'and report' retains its requested intent.",
+  "cases": [
+    {
+      "text": "Find the Blue remote and report its history.",
+      "at_ms": 11400,
+      "expected_object": "Blue remote",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the Red toolkit and report its last sighting.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "last_seen",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    }
+  ]
+}

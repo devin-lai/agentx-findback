@@ -1,0 +1,130 @@
+{
+  "name": "Constructed indirect object selection v1",
+  "scope": "Development benchmark on the generated fixture. Labels fixed before the first Nemotron run. Indirect descriptions require current states or historical events; no claim of natural-user distribution or real-footage accuracy. Keep first results and later tuned results separate.",
+  "cases": [
+    {
+      "text": "Where is the item that is still visible?",
+      "at_ms": 7000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where is the object that is no longer visible?",
+      "at_ms": 7000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Locate the item whose last position was on the right.",
+      "at_ms": 7000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Where is the object that never left the center area?",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where is the object that started in the left area?",
+      "at_ms": 11000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Show the history of the item that disappeared.",
+      "at_ms": 9000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "history",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where is the object that went out of view?",
+      "at_ms": 7000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find the object that was in the left area at the start.",
+      "at_ms": 5000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Which object remained in the center while the other was absent?",
+      "at_ms": 7000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Show the timeline of the item that stayed in the center.",
+      "at_ms": 7000,
+      "expected_object": "Blue remote",
+      "expected_intent": "history",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Which registered object is visible in the left area?",
+      "at_ms": 2000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "left"
+    },
+    {
+      "text": "Which registered object is visible in the right area?",
+      "at_ms": 5000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_status": "visible",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Which registered object is visible in the right area?",
+      "at_ms": 7000,
+      "expected_object": null,
+      "expected_intent": "location"
+    },
+    {
+      "text": "Find the object that was first registered after five seconds.",
+      "at_ms": 7000,
+      "expected_object": null,
+      "expected_intent": "location"
+    },
+    {
+      "text": "Find the item last observed in the right area.",
+      "at_ms": 7000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "last_seen",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Show the history of the item that returned after going missing.",
+      "at_ms": 11000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "history",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "name": "Prospective temporal anchor and conjunction confirmation v1",
+  "scope": "Twenty new hand-authored temporal stress questions, frozen before model inference with v13 source unchanged. Same generated visual trajectories and renamed inventory; not independent footage or naturally sampled user accuracy. Questions deliberately probe temporal anchors after an inspected v13 omission. Oracle predicates are only label-consistency checks and are never shown to the model.",
+  "fixture": {
+    "objects": {
+      "Red toolkit": {
+        "name": "Crimson repair kit",
+        "label": "custom"
+      },
+      "Blue remote": {
+        "name": "Indigo handset",
+        "label": "custom"
+      }
+    }
+  },
+  "cases": [
+    {
+      "text": "Locate the item in the right area at the beginning of the recording.",
+      "at_ms": 5000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "right",
+          "at_ms": 0
+        }
+      ]
+    },
+    {
+      "text": "Find the object in the left area at the start of the recording.",
+      "at_ms": 5000,
+      "expected_object": "Crimson repair kit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "left",
+          "at_ms": 0
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Locate whichever object occupied the center area in the opening frame.",
+      "at_ms": 9000,
+      "expected_object": "Indigo handset",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "center",
+          "at_ms": 0
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find an item visible in both the left area and the right area at the beginning.",
+      "at_ms": 5000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "left",
+          "at_ms": 0
+        },
+        {
+          "kind": "state",
+          "zone": "right",
+          "at_ms": 0
+        }
+      ]
+    },
+    {
+      "text": "Locate the item initially observed in the left area and currently visible in the center.",
+      "at_ms": 9000,
+      "expected_object": "Crimson repair kit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "first_seen",
+          "zone": "left"
+        },
+        {
+          "kind": "state",
+          "zone": "center",
+          "status": "visible"
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the object first seen in the center and still visible in the center now.",
+      "at_ms": 9000,
+      "expected_object": "Indigo handset",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "first_seen",
+          "zone": "center"
+        },
+        {
+          "kind": "state",
+          "zone": "center",
+          "status": "visible"
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Which object occupied the right area when the recording began?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "right",
+          "at_ms": 0
+        }
+      ]
+    },
+    {
+      "text": "Locate the item whose earliest recorded position was in the center area.",
+      "at_ms": 5000,
+      "expected_object": "Indigo handset",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "first_seen",
+          "zone": "center"
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the item with no recorded disappearances through two seconds.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous",
+      "oracle_filters": [
+        {
+          "kind": "event",
+          "event": "lost",
+          "min_count": 0,
+          "max_count": 0,
+          "end_ms": 2000
+        }
+      ]
+    },
+    {
+      "text": "Which item had zero disappearances between six and seven seconds?",
+      "at_ms": 9000,
+      "expected_object": "Indigo handset",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "event",
+          "event": "lost",
+          "min_count": 0,
+          "max_count": 0,
+          "start_ms": 6000,
+          "end_ms": 7000
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Locate the item that disappeared between six and seven seconds.",
+      "at_ms": 9000,
+      "expected_object": "Crimson repair kit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "event",
+          "event": "lost",
+          "start_ms": 6000,
+          "end_ms": 7000
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the object that reappeared before 7.5 seconds.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "event",
+          "event": "reappeared",
+          "end_ms": 7499
+        }
+      ]
+    },
+    {
+      "text": "Which currently visible item has another registered object that is not visible?",
+      "at_ms": 7000,
+      "expected_object": "Indigo handset",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "status": "visible"
+        },
+        {
+          "kind": "other_state",
+          "status": "not_visible"
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Locate the item that is not visible now but was visible at two seconds.",
+      "at_ms": 7000,
+      "expected_object": "Crimson repair kit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "status": "not_visible"
+        },
+        {
+          "kind": "state",
+          "status": "visible",
+          "at_ms": 2000
+        }
+      ],
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find an object visible in the right area now.",
+      "at_ms": 7000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "right",
+          "status": "visible"
+        }
+      ]
+    },
+    {
+      "text": "Locate the object currently visible in the left area.",
+      "at_ms": 5000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "zone": "left",
+          "status": "visible"
+        }
+      ]
+    },
+    {
+      "text": "Show the timeline of the item with a recorded transition from left to right.",
+      "at_ms": 9000,
+      "expected_object": "Crimson repair kit",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "oracle_filters": [
+        {
+          "kind": "event",
+          "event": "moved",
+          "previous_zone": "left",
+          "zone": "right"
+        }
+      ],
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Which item has its very first recorded sighting in the right area?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "first_seen",
+          "zone": "right"
+        }
+      ]
+    },
+    {
+      "text": "Find the item registered between zero and 0.5 seconds.",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous",
+      "oracle_filters": [
+        {
+          "kind": "registered",
+          "start_ms": 0,
+          "end_ms": 500
+        }
+      ]
+    },
+    {
+      "text": "Which registered object is visible at fifteen seconds?",
+      "at_ms": 9000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "oracle_filters": [
+        {
+          "kind": "state",
+          "status": "visible",
+          "at_ms": 15000
+        }
+      ],
+      "oracle_rejected_future": true
+    }
+  ]
+}

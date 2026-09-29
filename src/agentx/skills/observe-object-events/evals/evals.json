@@ -1,0 +1,103 @@
+{
+  "skill_name": "observe-object-events",
+  "version": "1.1.0",
+  "skill_sha256": "e7e3fc0e89a4f50f9e5c3875878be42bfe744442744146e421083b30591205be",
+  "scope_note": "Internal AgentX FindBack prompt-contract Skill. The application, not a coding agent, decides when to load it, so should_trigger means that the application loads this Skill for the request described by 'prompt' and 'routing'. Routing is checked from the saved trace (answer skills[], review skills[] or run provenance.skill) by tests/test_skill_package.py against the generated controlled fixture, with model calls stubbed. The assertions about model output need a configured planner or Cosmos service and are measured by scripts/evaluate_skill_ablation.py, not by the tests.",
+  "routing_semantics": "surface: question (POST /api/v1/runs/{run_id}/questions), review (POST /api/v1/runs/{run_id}/review) or index (POST /api/v1/videos/{video_id}/runs). scene: the generated fixture, fixed or bumped. planner: whether the server has a planner endpoint configured. select: the registered object passed as object_id. at_ms, use_provider and use_skills are sent as given.",
+  "evals": [
+    {
+      "id": "ooe-001-index-fixed",
+      "prompt": "Build memory for the controlled desk fixture.",
+      "expected_skill": "observe-object-events",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "index",
+        "scene": "fixed",
+        "backend": "reference"
+      },
+      "expected_output": "The run's provenance records this Skill's name and SHA-256. Red toolkit events: appeared 00:00.0 Left area, moved 00:03.2 Right area (confirmed by consecutive samples), lost 00:06.0 (not_detected), reappeared 00:08.0 Center area. Blue remote: appeared 00:00.0 Center area. Every event is bound to an observation ID.",
+      "assertions": [
+        "The run provenance names observe-object-events with the current SHA-256.",
+        "Missing detections end visibility immediately (lost at 00:06.0).",
+        "No destination, theft or person is inferred from the disappearance."
+      ]
+    },
+    {
+      "id": "ooe-002-index-bumped",
+      "prompt": "Build memory for the bumped-camera fixture.",
+      "expected_skill": "observe-object-events",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "index",
+        "scene": "bumped",
+        "backend": "reference"
+      },
+      "expected_output": "The camera is knocked at 00:06.0 and nothing on the desk moves. No event is created by the knock; at 00:12.0 both objects are visible with scene_reference compensated, the Red toolkit in the Right area and the Blue remote in the Center area.",
+      "assertions": [
+        "The run provenance names observe-object-events.",
+        "A camera change keeps the observation and its box; no lost or moved event is caused by the knock."
+      ]
+    },
+    {
+      "id": "ooe-101-neg-question",
+      "prompt": "Where was the Red toolkit last seen?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "Query time does not load the indexing Skill.",
+      "assertions": [
+        "The answer's skills trace does not include observe-object-events."
+      ]
+    },
+    {
+      "id": "ooe-102-neg-agent",
+      "prompt": "What happened to the Red toolkit?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 9600,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The tool agent answers from events that already exist; it does not load the indexing Skill.",
+      "assertions": [
+        "The answer's skills trace does not include observe-object-events."
+      ]
+    },
+    {
+      "id": "ooe-103-neg-review",
+      "prompt": "What changed on the desk before this moment?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "review",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 3500,
+        "select": null,
+        "use_skills": true
+      },
+      "expected_output": "Visual review loads only review-visual-evidence.",
+      "assertions": [
+        "The review's skills trace does not include observe-object-events."
+      ]
+    }
+  ]
+}

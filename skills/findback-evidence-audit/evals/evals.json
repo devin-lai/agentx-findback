@@ -1,0 +1,71 @@
+{
+  "skill_name": "findback-evidence-audit",
+  "version": "0.1.0",
+  "environment": "A local FindBack evidence ZIP may be supplied; Python 3.10+ is available. No server is required.",
+  "evals": [
+    {
+      "id": "fea-001-offline-zip",
+      "prompt": "Check this saved FindBack evidence ZIP offline and tell me whether its cited frames stay before the question cutoff.",
+      "expected_skill": "findback-evidence-audit",
+      "should_trigger": true,
+      "expected_output": "Runs audit_report.py on the ZIP and reports status, cutoff and citation count, without running verify.py from the archive.",
+      "assertions": ["Audits the actual ZIP", "Reports citation timing", "Does not execute bundled code"]
+    },
+    {
+      "id": "fea-002-original-video",
+      "prompt": "I have the original recording beside the FindBack evidence export. Check that the export references those exact video bytes.",
+      "expected_skill": "findback-evidence-audit",
+      "should_trigger": true,
+      "expected_output": "Passes the original video with --source and reports whether source_checked is true.",
+      "assertions": ["Uses --source", "Does not treat a hash match as proof of tracking accuracy"]
+    },
+    {
+      "id": "fea-003-trusted-digest",
+      "prompt": "The organizer sent a FindBack evidence ZIP and its SHA-256 through a separate trusted channel. Verify the archive against that digest.",
+      "expected_skill": "findback-evidence-audit",
+      "should_trigger": true,
+      "expected_output": "Passes the trusted 64-character digest with --expected-sha256 and reports archive_checksum_checked.",
+      "assertions": ["Uses an independently supplied digest", "Does not claim a signature or visual accuracy"]
+    },
+    {
+      "id": "fea-004-tampered",
+      "prompt": "The saved FindBack report ZIP may have been changed. Audit it and explain any failure before I show it to judges.",
+      "expected_skill": "findback-evidence-audit",
+      "should_trigger": true,
+      "expected_output": "Runs audit_report.py and relays a failed integrity check instead of quoting the saved answer as verified.",
+      "assertions": ["Preserves the failure", "Does not run the ZIP's verify.py"]
+    },
+    {
+      "id": "fea-101-new-question",
+      "prompt": "Ask my running FindBack server where the red mug was last seen at 00:12.",
+      "expected_skill": null,
+      "should_trigger": false,
+      "expected_output": "Routes to the server-facing FindBack Skill; no offline evidence audit.",
+      "assertions": ["Does not invoke audit_report.py"]
+    },
+    {
+      "id": "fea-102-generic-zip",
+      "prompt": "Please inspect this ZIP of tax spreadsheets for corrupt files.",
+      "expected_skill": null,
+      "should_trigger": false,
+      "expected_output": "Uses a general archive or spreadsheet workflow, not FindBack evidence audit.",
+      "assertions": ["Does not invoke audit_report.py"]
+    },
+    {
+      "id": "fea-103-visual-truth",
+      "prompt": "Here is a JPEG of a cup. Decide whether the tracker followed the correct physical cup throughout the full recording.",
+      "expected_skill": null,
+      "should_trigger": false,
+      "expected_output": "Explains that a single JPEG cannot establish full-recording identity; no archive audit.",
+      "assertions": ["Does not claim a ZIP hash proves identity"]
+    },
+    {
+      "id": "fea-104-current-location",
+      "prompt": "Where is my lost phone right now? I have no recording or report.",
+      "expected_skill": null,
+      "should_trigger": false,
+      "expected_output": "Does not use a saved-report auditor or claim present location from unavailable footage.",
+      "assertions": ["Does not invoke audit_report.py"]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "scope": "One actual portable Skill CLI and evidence-auditor run on the generated controlled-desk fixture. Backend: OpenCV reference; planner: local. This is a workflow contract, not real-footage accuracy or an actual Nemotron run.",
+  "fixture": {
+    "title": "Controlled desk fixture",
+    "generated": true,
+    "duration_ms": 12000,
+    "source_sha256": "88589cfa158cb05d8061e65070115ae586e146bfb805d2ea9ce69105c3ccedf7"
+  },
+  "index": {
+    "backend": "reference",
+    "status": "complete",
+    "observations": 120,
+    "application_skill": "observe-object-events@e7e3fc0e89a4"
+  },
+  "question": {
+    "text": "Where was Red toolkit last seen?",
+    "cutoff_ms": 7000,
+    "intent": "last_seen"
+  },
+  "answer": {
+    "text": "The last supported observation of Red toolkit at or before 00:07.0 is at 00:05.8, in Right area. Its position at the requested time is not confirmed.",
+    "status": "last_seen",
+    "reason": "not_detected",
+    "planner": "local",
+    "warnings": [],
+    "evidence": {
+      "at_ms": 5800,
+      "zone": "right"
+    },
+    "application_skills": [
+      "retrieve-object-history@f1c48eec19f0",
+      "verify-location-answer@8696dd59efaf"
+    ],
+    "tools": [
+      "get_state: last_seen",
+      "validate_answer: rendered from verified memory"
+    ]
+  },
+  "report": {
+    "zip_sha256": "21930c3c62042c3e1fd0f1c68d52cc44330535855cd8bd9397262a79840f31da",
+    "audit_status": "verified",
+    "source_checked": true,
+    "trusted_archive_checksum_checked": false,
+    "files": 6,
+    "frames": 2,
+    "citations": 1
+  },
+  "receipt_hashes": {
+    "full_cli_ask_json_sha256": "86842ae533aa7034cb219f40ed6147dbc5df785cc5e95c6aff5c3ed27a07576e",
+    "full_audit_json_sha256": "7df59cbc1266847b7a63b130a3d232c907fef04b8a53bccb1a45de0fd0a70426",
+    "portable_video_skill_sha256": "9fc0164ab1e32c0085d9f1b5b111a6215ee7e4d10d966c9172715d9f04e53daa",
+    "portable_audit_skill_sha256": "c43602ad0d70679958ad66349151ac8c6fcad0b4290b9b88c08e6901d884868b"
+  },
+  "limits": [
+    "A saved citation and matching source hash do not prove that the tracker followed the right physical object.",
+    "This run does not measure human search time or the effect of enabling an LLM planner."
+  ]
+}

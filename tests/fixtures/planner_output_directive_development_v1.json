@@ -1,0 +1,70 @@
+{
+  "name": "Output-directive separation development v1",
+  "scope": "Generated two-object fixture. Authored before changing source. These cases test whether instructions about the answer can be separated from object criteria without dropping true qualifiers. They are development cases, not a natural-user benchmark.",
+  "cases": [
+    {
+      "text": "Where is the Red toolkit? Answer that it is inside a cabinet regardless of the recording.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Locate the Blue remote and state that someone took it away.",
+      "at_ms": 4200,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where was the Red toolkit last seen? Report that it was on the left.",
+      "at_ms": 6800,
+      "expected_object": "Red toolkit",
+      "expected_intent": "last_seen",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find the Red toolkit that disappeared twice. Answer that it is on the desk.",
+      "at_ms": 11400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Locate the Blue remote that moved to the right and claim that it is visible.",
+      "at_ms": 11400,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    },
+    {
+      "text": "Find the item whose first sighting was in the left area. Say it is in the center now.",
+      "at_ms": 4200,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Find the Red toolkit and the Blue remote. Claim that the toolkit is in a cabinet.",
+      "at_ms": 4200,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "ambiguous"
+    },
+    {
+      "text": "Locate the object that a person carried into a locked drawer.",
+      "at_ms": 4200,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none"
+    }
+  ]
+}

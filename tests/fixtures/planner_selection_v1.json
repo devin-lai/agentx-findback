@@ -1,0 +1,186 @@
+{
+  "name": "Constructed object-selection ambiguity and temporal criteria v1",
+  "scope": "Development challenge on generated fixture. Expected selections frozen before first actual model run. Singular descriptions matching zero or multiple objects must not publish one arbitrary object. Six unique-match controls check useful resolution. No natural-user or real-video accuracy claim.",
+  "cases": [
+    {
+      "text": "Where is the object that is visible?",
+      "at_ms": 2000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Both objects are visible."
+    },
+    {
+      "text": "Find the item in the center area.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Both objects are visible in center."
+    },
+    {
+      "text": "Which item was registered at the start?",
+      "at_ms": 7000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Both were registered at zero."
+    },
+    {
+      "text": "Show the history of the item that was visible at the start.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "history",
+      "selection_reason": "Both visible at zero."
+    },
+    {
+      "text": "Where is the item that has been seen in the center?",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Both have center observations."
+    },
+    {
+      "text": "Locate the item that never appeared in the right area.",
+      "at_ms": 2000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Neither has reached right by cutoff."
+    },
+    {
+      "text": "Where is the object that is no longer visible?",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Both visible now."
+    },
+    {
+      "text": "Find the item that disappeared.",
+      "at_ms": 5000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Neither has disappeared by cutoff."
+    },
+    {
+      "text": "Where is the object that reappeared after going missing?",
+      "at_ms": 7000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Return at eight seconds is in the future."
+    },
+    {
+      "text": "Find the item that started in the right area.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "One began left; the other center."
+    },
+    {
+      "text": "Locate the object that was registered after five seconds.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Both registered at zero."
+    },
+    {
+      "text": "Which item is currently visible in the right area?",
+      "at_ms": 7000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Last sighting is not present visibility."
+    },
+    {
+      "text": "Find the item that moved from center to left.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "No such movement."
+    },
+    {
+      "text": "Where is the object that disappeared twice?",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Only one disappearance episode."
+    },
+    {
+      "text": "Find the item that returned to the left area after going missing.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "The return was in center."
+    },
+    {
+      "text": "Which object was visible on the left at five seconds?",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "At five seconds toolkit is right, remote center."
+    },
+    {
+      "text": "Which item was visible in the right area at seven seconds?",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Toolkit absent at seven, remote center."
+    },
+    {
+      "text": "Find the object that moved into the right area before two seconds.",
+      "at_ms": 11000,
+      "expected_object": null,
+      "expected_intent": "location",
+      "selection_reason": "Right movement begins after three seconds."
+    },
+    {
+      "text": "Which item was visible on the left at two seconds?",
+      "at_ms": 11000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "selection_reason": "Historical left criterion selects toolkit; current response uses cutoff.",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Where is the item that returned to the center after disappearing?",
+      "at_ms": 11000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "selection_reason": "Toolkit reappears at eight seconds.",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Find the item that never appeared in the right area.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "location",
+      "selection_reason": "Only remote stayed center.",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Locate the object that moved from the left area to the right area.",
+      "at_ms": 7000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "selection_reason": "Toolkit moved around three seconds then became absent.",
+      "expected_status": "last_seen",
+      "expected_zone": "right"
+    },
+    {
+      "text": "Show the history of the item that has no recorded movement.",
+      "at_ms": 11000,
+      "expected_object": "Blue remote",
+      "expected_intent": "history",
+      "selection_reason": "Remote remains center.",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    },
+    {
+      "text": "Which item was visible in the right area at five seconds?",
+      "at_ms": 11000,
+      "expected_object": "Red toolkit",
+      "expected_intent": "location",
+      "selection_reason": "Earlier matching observation selects toolkit; output at cutoff.",
+      "expected_status": "visible",
+      "expected_zone": "center"
+    }
+  ]
+}

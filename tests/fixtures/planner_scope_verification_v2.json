@@ -1,0 +1,17 @@
+{
+  "name": "Literal scope and region-transition verification v2",
+  "scope": "Eleven newly authored questions on the generated two-object fixture. Frozen after inspecting v1 verification and before any source revision or model call on this file. Tests absent literal nouns, varied no-transition wording with explicit time limits, false qualifiers and known-object controls. This is not a natural-user study.",
+  "cases": [
+    {"text": "Where is my laser pointer?", "at_ms": 4200, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Find the box cutter.", "at_ms": 6800, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Locate my Allen key.", "at_ms": 11400, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Which registered item has no zone-to-zone transition through eleven seconds?", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Find the item that never switched between marked regions before 11 seconds.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Locate the object with no recorded crossings between areas through 11 seconds.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Find the Red toolkit that never switched areas.", "at_ms": 11400, "expected_object": null, "expected_intent": "location", "expected_resolution": "none"},
+    {"text": "Where is the Blue remote at 4.2 seconds?", "at_ms": 4200, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"},
+    {"text": "Which object moved from the Left area to the Right area?", "at_ms": 4200, "expected_object": "Red toolkit", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "right"},
+    {"text": "Find the item last observed in the Right area.", "at_ms": 6800, "expected_object": "Red toolkit", "expected_intent": "last_seen", "expected_resolution": "unique", "expected_status": "last_seen", "expected_zone": "right"},
+    {"text": "Find the object seen only in the Center area through 11 seconds.", "at_ms": 11400, "expected_object": "Blue remote", "expected_intent": "location", "expected_resolution": "unique", "expected_status": "visible", "expected_zone": "center"}
+  ]
+}

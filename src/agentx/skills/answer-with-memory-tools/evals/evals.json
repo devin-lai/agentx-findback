@@ -1,0 +1,198 @@
+{
+  "skill_name": "answer-with-memory-tools",
+  "version": "2",
+  "skill_sha256": "57fc9d2218d33b29dd94397e675200708d6256b848848df804a338d69f70dde3",
+  "scope_note": "Internal AgentX FindBack prompt-contract Skill. The application, not a coding agent, decides when to load it, so should_trigger means that the application loads this Skill for the request described by 'prompt' and 'routing'. Routing is checked from the saved trace (answer skills[], review skills[] or run provenance.skill) by tests/test_skill_package.py against the generated controlled fixture, with model calls stubbed. The assertions about model output need a configured planner or Cosmos service and are measured by scripts/evaluate_skill_ablation.py, not by the tests.",
+  "routing_semantics": "surface: question (POST /api/v1/runs/{run_id}/questions), review (POST /api/v1/runs/{run_id}/review) or index (POST /api/v1/videos/{video_id}/runs). scene: the generated fixture, fixed or bumped. planner: whether the server has a planner endpoint configured. select: the registered object passed as object_id. at_ms, use_provider and use_skills are sent as given.",
+  "evals": [
+    {
+      "id": "awmt-001-direct-last-seen",
+      "prompt": "Where was the Red toolkit last seen?",
+      "expected_skill": "answer-with-memory-tools",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The tool agent loads this Skill, calls get_state for the Red toolkit first and finishes with intent last_seen, citing the observation get_state returned. The Red toolkit was last seen at 00:05.8 in the Right area; its position at 00:06.8 is not confirmed.",
+      "assertions": [
+        "The answer's skills trace includes answer-with-memory-tools.",
+        "get_state is called for the matched object before the final step.",
+        "Only observation IDs returned by a tool are cited; no citation warning is added.",
+        "The answer does not turn the past sighting into a present location."
+      ]
+    },
+    {
+      "id": "awmt-002-history",
+      "prompt": "What happened to the Red toolkit?",
+      "expected_skill": "answer-with-memory-tools",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 9600,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The agent calls get_history and reports only recorded events: appeared 00:00.0 in the Left area, moved to the Right area at 00:03.2, lost at 00:06.0, reappeared in the Center area at 00:08.0; visible in the Center area at 00:09.6.",
+      "assertions": [
+        "The answer's skills trace includes answer-with-memory-tools.",
+        "get_history is called because the question asks what happened.",
+        "Only recorded appeared, moved, reappeared, lost and ambiguous events are reported, with times and area names."
+      ]
+    },
+    {
+      "id": "awmt-003-explicit-selection",
+      "prompt": "Where is it now?",
+      "expected_skill": "answer-with-memory-tools",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 9600,
+        "select": "Blue remote",
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "With the Blue remote selected explicitly, the agent answers about that object: visible in the Center area at 00:09.6 of the recording.",
+      "assertions": [
+        "The answer's skills trace includes answer-with-memory-tools.",
+        "The answer concerns the selected object only.",
+        "The answer describes the recording, not a present real-world location."
+      ]
+    },
+    {
+      "id": "awmt-004-timeline",
+      "prompt": "Show me the history of the Blue remote",
+      "expected_skill": "answer-with-memory-tools",
+      "should_trigger": true,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 11400,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "The agent calls get_history; the Blue remote appeared in the Center area at 00:00.0 and has no recorded movement; it is visible in the Center area at 00:11.4.",
+      "assertions": [
+        "The answer's skills trace includes answer-with-memory-tools.",
+        "No movement is invented for an object with none recorded."
+      ]
+    },
+    {
+      "id": "awmt-101-neg-local-resolver",
+      "prompt": "Where was the Red toolkit last seen?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": false,
+        "use_skills": true
+      },
+      "expected_output": "use_provider=false forces the deterministic resolver, which does not run a tool loop, so this Skill is not loaded. The Red toolkit was last seen at 00:05.8 in the Right area; its position at 00:06.8 is not confirmed.",
+      "assertions": [
+        "The answer's skills trace does not include answer-with-memory-tools.",
+        "planner is local."
+      ]
+    },
+    {
+      "id": "awmt-102-neg-no-planner",
+      "prompt": "Where was the Red toolkit last seen?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "Without a configured planner the deterministic resolver answers and this Skill is not loaded. The Red toolkit was last seen at 00:05.8 in the Right area; its position at 00:06.8 is not confirmed.",
+      "assertions": [
+        "The answer's skills trace does not include answer-with-memory-tools."
+      ]
+    },
+    {
+      "id": "awmt-103-neg-indirect",
+      "prompt": "Where is the object that is no longer in view?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": true
+      },
+      "expected_output": "An indirect description goes to typed selection, which loads compile-object-selection instead of this Skill.",
+      "assertions": [
+        "The answer's skills trace does not include answer-with-memory-tools.",
+        "The answer's skills trace includes compile-object-selection."
+      ]
+    },
+    {
+      "id": "awmt-104-neg-skills-withheld",
+      "prompt": "Where was the Red toolkit last seen?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "question",
+        "scene": "fixed",
+        "planner": true,
+        "at_ms": 6800,
+        "select": null,
+        "use_provider": true,
+        "use_skills": false
+      },
+      "expected_output": "use_skills=false is the ablation arm: no Skill is loaded, and code still validates every citation.",
+      "assertions": [
+        "The answer's skills trace is empty."
+      ]
+    },
+    {
+      "id": "awmt-105-neg-review",
+      "prompt": "What changed on the desk before this moment?",
+      "expected_skill": null,
+      "should_trigger": false,
+      "files": [],
+      "routing": {
+        "surface": "review",
+        "scene": "fixed",
+        "planner": false,
+        "at_ms": 3500,
+        "select": null,
+        "use_skills": true
+      },
+      "expected_output": "A Cosmos review loads only review-visual-evidence; the tool-loop Skill never applies to visual judgement.",
+      "assertions": [
+        "The review's skills trace does not include answer-with-memory-tools."
+      ]
+    }
+  ]
+}

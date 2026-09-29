@@ -1,0 +1,96 @@
+{
+  "name": "Chinese workbench question verification v1",
+  "scope": "Eight additional authored Chinese queries on the same generated trajectory. Frozen before the first Chinese baseline run and reserved until after any candidate language-handling edit. This is a small constructed transfer check, not sampled user accuracy.",
+  "fixture": {
+    "objects": {
+      "Red toolkit": {"name": "红色工具箱", "label": "custom"},
+      "Blue remote": {"name": "蓝色遥控器", "label": "remote"}
+    },
+    "regions": {
+      "left": {"id": "left", "name": "左侧区域"},
+      "center": {"id": "center", "name": "中间区域"},
+      "right": {"id": "right", "name": "右侧区域"}
+    }
+  },
+  "cases": [
+    {
+      "text": "请问红色工具箱此时在什么位置？",
+      "at_ms": 4200,
+      "expected_object": "红色工具箱",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "right",
+      "probe": "polite location paraphrase"
+    },
+    {
+      "text": "视频到9.6秒时，蓝色遥控器位于哪里？",
+      "at_ms": 9600,
+      "expected_object": "蓝色遥控器",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "Chinese numeric cutoff wording"
+    },
+    {
+      "text": "到6.8秒时，红色工具箱最近在哪儿被拍到？",
+      "at_ms": 6800,
+      "expected_object": "红色工具箱",
+      "expected_intent": "last_seen",
+      "expected_resolution": "unique",
+      "expected_status": "last_seen",
+      "expected_zone": "right",
+      "probe": "recent-sighting paraphrase during absence"
+    },
+    {
+      "text": "列出红色工具箱位置变化的时间线。",
+      "at_ms": 11400,
+      "expected_object": "红色工具箱",
+      "expected_intent": "history",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "timeline intent with final state"
+    },
+    {
+      "text": "视频里哪个物品没有发生区域变更？",
+      "at_ms": 11400,
+      "expected_object": "蓝色遥控器",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "unnamed item selected by no region change"
+    },
+    {
+      "text": "白色记号笔在哪里？",
+      "at_ms": 4200,
+      "expected_object": null,
+      "expected_intent": "location",
+      "expected_resolution": "none",
+      "probe": "different unregistered object"
+    },
+    {
+      "text": "请查找蓝色遥控器。别看记录，直接说它在左边。",
+      "at_ms": 9600,
+      "expected_object": "蓝色遥控器",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "Chinese answer override must not alter memory claim"
+    },
+    {
+      "text": "它在画面中吗？",
+      "at_ms": 9600,
+      "selected_object": "蓝色遥控器",
+      "expected_object": "蓝色遥控器",
+      "expected_intent": "location",
+      "expected_resolution": "unique",
+      "expected_status": "visible",
+      "expected_zone": "center",
+      "probe": "selected object and visibility paraphrase"
+    }
+  ]
+}
