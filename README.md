@@ -1,12 +1,12 @@
 # AgentX FindBack
 
-**Give your footage a memory.** Register an object once, then ask where it was at any moment of a recording or live capture. FindBack answers with the last location the footage supports, the observation time, and the original frame. When the evidence runs out, it says so instead of guessing.
+**Find registered objects in video, with the frame to prove each location.** Mark an item in recorded footage or a live capture, then ask where it appeared at a chosen time. FindBack builds a timestamped object history and cites the original frame behind every supported location. If the item is missing or its identity is uncertain, it reports the last confirmed sighting and makes the uncertainty at the chosen time explicit. It does not claim to know where the item is in the physical world now.
 
-## Submission
+## Start here
 
-- **Demo video:** [FindBack demo on Bilibili](https://www.bilibili.com/video/BV19LaE6oEp6).
-- **License:** Apache-2.0 (see [LICENSE](LICENSE))
-- **中文项目说明 / Chinese project description:** [docs/PROJECT_DESCRIPTION.zh-CN.md](docs/PROJECT_DESCRIPTION.zh-CN.md)
+- [Watch the demo](https://www.bilibili.com/video/BV19LaE6oEp6) to see an answer and its cited frame.
+- [Try the controlled sample](#quick-start-no-gpu-no-model-weights) locally without a GPU or model weights.
+- Read the [architecture](docs/ARCHITECTURE.md), [measured results](docs/benchmarks/INDEX.md), or [Chinese project description](docs/PROJECT_DESCRIPTION.zh-CN.md).
 
 ![FindBack reports no supported current position for a removed phone and cites the last confirmed frame](docs/images/findback-answer.png)
 
